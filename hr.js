@@ -20,6 +20,7 @@
     const closed = ["rejected", "withdrew", "reserve"].includes(c.status);
     return `<div class="card" id="cd" data-id="${c.id}" style="display:flex;flex-direction:column;gap:12px">
       <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><h2 style="font-size:20px">${esc(c.name)} <span class="pill">${ST[c.status]}</span></h2><span class="lbl">${esc([c.phone, c.email, c.telegram, c.instagram].filter(Boolean).join(" · "))}</span></div>
+      ${c.answers ? `<div class="card" style="background:#FBFAFD;font-size:13px;display:flex;flex-direction:column;gap:4px">${Object.entries(c.answers).map(([k, v]) => `<div><b>${esc(k)}:</b> ${esc(String(v))}</div>`).join("")}</div>` : ""}
       <div style="display:flex;flex-wrap:wrap;gap:10px">
         ${sel("f_in_us", "В США", tri, c.in_us)}${sel("f_license", "Лицензия CA", LIC, c.license)}${inp("f_license_no", "Номер лицензии", c.license_no)}${inp("f_license_checked_on", "Проверена (DCA/BBC)", c.license_checked_on, "date")}
         ${inp("f_call_at", "Звонок", loc(c.call_at), "datetime-local")}${inp("f_call_result", "Итог звонка", c.call_result)}
