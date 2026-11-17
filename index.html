@@ -3,11 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<!doctype html>
-<html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SVITNAIL OS</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -48,48 +43,6 @@ input{border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:inh
 <script src="./ops.js"></script>
 <script src="./hr.js"></script>
 <script src="./plan.js"></script>
-<script>boot();</script>
-</body>
-</html>
-<title>SVITNAIL OS</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
-<style>
-:root{--ground:#F4F3F7;--ink:#1E1B2E;--muted:#5B5870;--line:#DEDCE8;--accent:#8C2F7B;--pink:#E58BD3;--ok:#1B7A4E;--warn:#9A5B00;--bad:#B3261E;--card:#fff}
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--ground)}
-h1,h2{font-family:'Space Grotesk',sans-serif;margin:0;font-weight:600}
-.app{display:flex;flex-wrap:wrap;min-height:100vh}
-nav{flex:0 0 232px;background:var(--ink);padding:24px 16px;display:flex;flex-direction:column;gap:4px}
-nav .logo{font-family:'Space Grotesk';font-weight:600;font-size:20px;color:#fff;padding:0 12px 20px}
-nav .logo span{color:var(--pink)}
-nav button{all:unset;cursor:pointer;padding:10px 12px;border-radius:8px;color:#D9D6E6;font-size:14px}
-nav button.on{background:#34304A;color:#fff;font-weight:500}
-nav .who{margin-top:auto;color:#A9A5BD;font-size:13px;padding:12px}
-main{flex:999 1 640px;min-width:0;padding:28px 32px;display:flex;flex-direction:column;gap:20px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.big{font-family:'Space Grotesk';font-size:30px;font-weight:600;margin-top:6px}
-.lbl{font-size:13px;color:var(--muted)}
-.pill{display:inline-block;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:600;background:#ECE9F3}
-.stage{border-top:1px solid #ECE9F3;padding:12px 0}
-.step{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:6px 0;font-size:14px}
-.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-.login form{width:100%;max-width:380px;display:flex;flex-direction:column;gap:14px}
-input{border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:inherit;background:#FBFAFD;width:100%}
-.btn{border:0;background:var(--accent);color:#fff;border-radius:10px;padding:13px;font:inherit;font-weight:600;cursor:pointer}
-.err{color:var(--bad);font-size:13px;min-height:16px}
-.proc{cursor:pointer}
-</style>
-</head>
-<body>
-<div id="root"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="./config.js"></script>
-<script src="./core.js"></script>
-<script src="./tasks.js"></script>
-<script src="./team.js"></script>
-<script src="./ops.js"></script>
-<script src="./hr.js"></script>
 <script>boot();</script>
 </body>
 </html>
