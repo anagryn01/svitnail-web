@@ -11,6 +11,9 @@
     const { data, error } = await sb.rpc("plan_path");
     if (error) return `<h1>Путь к $95k</h1><div class="card err">${esc(error.message)}</div>`;
     P = data;
+    const gp = (await sb.rpc("plan_gap")).data || [];
+    const short = gp.filter((g) => g.need != null && g.have < Math.round(g.need));
+    const gapBox = `<div class="card"><b>Мастеро-дни на 14 дней</b>${short.length ? `<div class="lbl" style="color:var(--bad);margin:4px 0 8px">Не хватает мастеро-дней: ${short.reduce((a, g) => a + Math.round(g.need) - g.have, 0)} в ${short.length} из 14 дней</div>` : ""}<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">${gp.map((g) => { const n = Math.round(g.need || 0), bad = g.have < n; return `<div style="background:${bad ? "#FCE4E2" : "#E6F4EC"};border:1px solid var(--line);border-radius:8px;padding:6px 8px;min-width:70px;flex:1 1 70px"><div class="lbl">${DW[g.dow]} ${+g.day.slice(8)}</div><div style="font-size:13px">нужно ${n}</div><div style="font-size:13px"><b>есть ${g.have}</b></div></div>`; }).join("")}</div></div>`;
     const isOwner = me.role === "owner", cur = data.current;
     const rows = data.months.filter((m) => m.plan_artist_days || m.actual_revenue);
     const max = Math.max(...rows.map((m) => Math.max(m.plan_revenue || 0, m.actual_revenue || 0)), 1);
@@ -34,7 +37,7 @@
     const days = data.days.map((d) => { const past = d.day < today; const fcol = past ? col(d.actual_revenue || 0, d.plan_revenue) : "#fff"; return `<div style="background:${fcol};border:1px solid var(--line);border-radius:8px;padding:6px 8px;min-width:78px;flex:1 1 78px"><div class="lbl">${DW[d.dow]} ${+d.day.slice(8)}</div><div style="font-size:13px">план ${K(d.plan_revenue)}</div>${past ? `<div style="font-size:13px"><b>${K(d.actual_revenue || 0)}</b></div>` : ""}</div>`; }).join("");
     return `<h1>Путь к $95k</h1>
       <div class="grid">${n(K(c.forecast_revenue), "Прогноз текущего месяца", "план " + K(c.plan_revenue))}${n(K(c.actual_revenue), "Факт на сегодня", c.actual_artist_days != null ? c.actual_artist_days + " мастеро-дней" : "")}${n("$95k", "Цель на апрель 2027", "211 мастеро-дней × $450")}</div>
-      <div class="card"><b>Месяцы: план и факт</b><div class="lbl" style="margin:4px 0 8px">Светлая полоса — план, тёмная — факт. Цифры плана — черновик, пока руководство не утвердило.</div>${rows.map(row).join("")}<div id="perr" class="lbl" style="color:var(--bad)"></div></div>
+      ${gapBox}<div class="card"><b>Месяцы: план и факт</b><div class="lbl" style="margin:4px 0 8px">Светлая полоса — план, тёмная — факт. Цифры плана — черновик, пока руководство не утвердило.</div>${rows.map(row).join("")}<div id="perr" class="lbl" style="color:var(--bad)"></div></div>
       <div class="card"><b>План по дням, ${mname(cur)}</b><div class="lbl" style="margin:4px 0 8px">Дневной план считает система из плана месяца и веса дня недели.</div><div style="display:flex;flex-wrap:wrap;gap:6px">${days}</div></div>`;
   }, bind() {
     document.querySelectorAll("button[data-save]").forEach((b) => (b.onclick = async () => {
